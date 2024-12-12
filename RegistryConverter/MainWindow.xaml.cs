@@ -1,6 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Serialization;
 using Microsoft.Win32;
 using RegistryConverter.Entity;
 
@@ -103,6 +105,17 @@ namespace RegistryConverter
             foreach (var value in mySubkey.Values)
             {
                 Values.Add(value);
+            }
+        }
+
+
+        private void SerializeButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<MySubkey>));
+
+            using (FileStream fs = new FileStream("Reestr.xml", FileMode.Create))
+            {
+                xml.Serialize(fs, SubKeys);
             }
         }
     }

@@ -7,7 +7,11 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TreeView Grid.Column = "0" ItemsSource="{Binding SubKeys}" TreeViewItem.Expanded = "FillTheNode">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TreeView Grid.Row="0" ItemsSource="{Binding SubKeys}" TreeViewItem.Expanded = "FillTheNode">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding SubSubKeys}">
                     <TextBlock Text="{Binding Name}"></TextBlock>
@@ -15,11 +19,13 @@
             </TreeView.ItemTemplate>
         </TreeView>
         
-        <DataGrid Grid.Column = "1" AutoGenerateColumns="False" ItemsSource="{Binding Values}">
+        <DataGrid Grid.Row="0" Grid.Column = "1" AutoGenerateColumns="False" ItemsSource="{Binding Values}">
              <DataGrid.Columns>
                   <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                   <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*"/>
              </DataGrid.Columns>
         </DataGrid>
+        
+        <Button Name="SerializeButton" Grid.Row="1" Grid.Column="1" Height="30" Width="100" HorizontalAlignment="Right" Margin="10" Content="Serialize to XML" Click="SerializeButton_OnClick"></Button>
     </Grid>
 </Window>

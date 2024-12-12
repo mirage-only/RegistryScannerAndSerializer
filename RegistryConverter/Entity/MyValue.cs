@@ -1,8 +1,17 @@
 namespace RegistryConverter.Entity;
 
-public class MyValue(string name, object? value)
+[Serializable]
+public class MyValue
 {
-    public string Name { get; set; } = name;
+    public string Name { get; set; }
 
-    public object? Value { get; set; } = value;
+    public object? Value { get; set; }
+    
+    public MyValue() { }
+
+    public MyValue(string name, object value)
+    {
+        Name = name;
+        Value = value;
+    }
 }
