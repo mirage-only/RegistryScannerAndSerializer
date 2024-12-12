@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Microsoft.Win32;
-using System.Xml;
 using RegistryConverter.Entity;
 
-namespace RegistryViewer
+namespace RegistryConverter
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public ObservableCollection<MySubkey> SubKeys { get; set; }
 
@@ -33,7 +30,7 @@ namespace RegistryViewer
         private void FillTheNode(Object sender, RoutedEventArgs e)
         {
             var treeViewItem = (TreeViewItem)e.OriginalSource;
-            if (treeViewItem == null) return;
+            /*if (treeViewItem == null) return;*/
             
             var mySubkey = (MySubkey)treeViewItem.DataContext;
             if (mySubkey == null || mySubkey.IsFilled) return;
@@ -53,9 +50,9 @@ namespace RegistryViewer
                mySubkey.Name.Equals("HKEY_CURRENT_CONFIG")) ScanBaseKeys(mySubkey);
             else
             {
-                RegistryKey key = mySubkey.OwnerRegistryKey.OpenSubKey(mySubkey.Path);
+                var key = mySubkey.OwnerRegistryKey.OpenSubKey(mySubkey.Path);
 
-                foreach (var subKeyName in key.GetSubKeyNames())
+                foreach (var subKeyName in key!.GetSubKeyNames())
                 {
                     mySubkey.SubSubKeys.Add(new MySubkey(subKeyName, mySubkey.OwnerRegistryKey, $"{mySubkey.Path}\\{subKeyName}"));
                 }

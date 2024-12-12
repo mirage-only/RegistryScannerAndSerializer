@@ -3,28 +3,13 @@ using Microsoft.Win32;
 
 namespace RegistryConverter.Entity;
 
-public class MySubkey
+public class MySubkey(string name, RegistryKey? ownerRegistryKey, string path)
 {
-    public string Name { get; set; }
-    public RegistryKey OwnerRegistryKey{get; set;}
-    public string Path {get; set;}
-    public ObservableCollection<MySubkey> SubSubKeys { get; set; }
-    public ObservableCollection<MyValue> Values { get; set; }
-    public bool IsFilled { get; set; } = false;
-
-    public MySubkey(string name, RegistryKey? ownerRegistryKey, string path)
-    {
-        Name = name;
-        
-        OwnerRegistryKey = ownerRegistryKey;
-        
-        Path = path;
-        
-        SubSubKeys = [];
-
-        Values = [];
-    }
-    
-    
+    public string Name { get; set; } = name;
+    public RegistryKey? OwnerRegistryKey{get; set;} = ownerRegistryKey;
+    public string Path {get; set;} = path;
+    public ObservableCollection<MySubkey> SubSubKeys { get; set; } = [];
+    public ObservableCollection<MyValue> Values { get; set; } = [];
+    public bool IsFilled { get; set; }
 }
 
