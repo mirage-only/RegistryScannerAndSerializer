@@ -9,10 +9,13 @@ namespace RegistryConverter
     public partial class MainWindow
     {
         public ObservableCollection<MySubkey> SubKeys { get; set; }
+        public ObservableCollection<MyValue> Values { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Values = [];
             
             SubKeys =
             [
@@ -30,10 +33,15 @@ namespace RegistryConverter
         private void FillTheNode(Object sender, RoutedEventArgs e)
         {
             var treeViewItem = (TreeViewItem)e.OriginalSource;
-            /*if (treeViewItem == null) return;*/
             
             var mySubkey = (MySubkey)treeViewItem.DataContext;
-            if (mySubkey == null || mySubkey.IsFilled) return;
+
+            if (mySubkey == null || mySubkey.IsFilled)
+            {
+               ValuesUpdate(mySubkey);
+                
+                return;
+            }
             
             LoadTheNode(mySubkey);
         }
@@ -62,8 +70,10 @@ namespace RegistryConverter
                     mySubkey.Values.Add(new MyValue(valueName, key.GetValue(valueName)));
                 }
             
+                ValuesUpdate(mySubkey);
+                
                 mySubkey.IsFilled = true;
-            
+                
                 mySubkey.OwnerRegistryKey.Close();
             }
         }
@@ -80,9 +90,20 @@ namespace RegistryConverter
                 mySubkey.Values.Add(new MyValue(valueName, mySubkey.OwnerRegistryKey.GetValue(valueName)));
             }
             
+            ValuesUpdate(mySubkey);
+            
             mySubkey.IsFilled = true;
             
             mySubkey.OwnerRegistryKey.Close();
+        }
+
+        private void ValuesUpdate(MySubkey mySubkey)
+        {
+            Values.Clear();
+            foreach (var value in mySubkey.Values)
+            {
+                Values.Add(value);
+            }
         }
     }
 }
