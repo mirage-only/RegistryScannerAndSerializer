@@ -113,10 +113,26 @@ namespace RegistryConverter
         {
             XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<MySubkey>));
 
-            using (FileStream fs = new FileStream("Reestr.xml", FileMode.Create))
+            using (FileStream fs = new FileStream(@"D:\University\5 semester\Coursework System Porgramming\RegistryConverter\RegistryConverter\Registry.xml", FileMode.Create))
             {
                 xml.Serialize(fs, SubKeys);
             }
+
+            ViewProgress();
+        }
+
+        private async void ViewProgress()
+        {
+            const int steps = 100;
+
+            for (var i = 0; i <= steps; i++)
+            {
+                SerealizeProgressBar.Value= i;
+                
+                await Task.Delay(20);
+            }
+            
+            SerealizeProgressBar.Value = 0;
         }
     }
 }
