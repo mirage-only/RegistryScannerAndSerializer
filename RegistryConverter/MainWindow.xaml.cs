@@ -69,7 +69,7 @@ namespace RegistryConverter
                 
                 foreach (var valueName in key.GetValueNames())
                 {
-                    mySubkey.Values.Add(new MyValue(valueName, key.GetValue(valueName)));
+                    mySubkey.Values.Add(new MyValue(valueName, key.GetValue(valueName), key.GetValue(valueName).GetType().ToString()));
                 }
             
                 ValuesUpdate(mySubkey);
@@ -89,7 +89,7 @@ namespace RegistryConverter
                 
             foreach (var valueName in mySubkey.OwnerRegistryKey.GetValueNames())
             {
-                mySubkey.Values.Add(new MyValue(valueName, mySubkey.OwnerRegistryKey.GetValue(valueName)));
+                mySubkey.Values.Add(new MyValue(valueName, mySubkey.OwnerRegistryKey.GetValue(valueName), mySubkey.OwnerRegistryKey.GetValue(valueName).GetType().ToString()));
             }
             
             ValuesUpdate(mySubkey);

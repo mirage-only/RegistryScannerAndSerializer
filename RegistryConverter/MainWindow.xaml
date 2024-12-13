@@ -23,6 +23,7 @@
              <DataGrid.Columns>
                   <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                   <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*"/>
+                  <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
              </DataGrid.Columns>
         </DataGrid>
         
