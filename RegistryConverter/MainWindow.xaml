@@ -6,6 +6,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
@@ -27,7 +28,11 @@
              </DataGrid.Columns>
         </DataGrid>
         
+        <ScrollViewer Grid.Row="0" Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <TextBlock Name="TextBlockWithXmlText" TextWrapping="Wrap" />
+        </ScrollViewer>
+        
         <ProgressBar Name="SerealizeProgressBar" Grid.Row="1" Grid.Column="1" Height = "30" Width="200" HorizontalAlignment="Left" Margin="20"></ProgressBar>
-        <Button Name="SerializeButton" Grid.Row="1" Grid.Column="1" Height="30" Width="100" HorizontalAlignment="Right" Margin="10" Content="Serialize to XML" Click="SerializeButton_OnClick"></Button>
+        <Button Name="SerializeButton" Grid.Row="1" Grid.Column="2" Height="30" Width="100" HorizontalAlignment="Right" Margin="10" Content="Serialize to XML" Click="SerializeButton_OnClick"></Button>
     </Grid>
 </Window>

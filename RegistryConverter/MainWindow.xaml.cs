@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 using Microsoft.Win32;
 using RegistryConverter.Entity;
@@ -133,6 +134,18 @@ namespace RegistryConverter
             }
             
             SerealizeProgressBar.Value = 0;
+            LoadXmlData();
+        }
+
+        private void LoadXmlData()
+        {
+            const string xmlFilePath = @"D:\University\5 semester\Coursework System Porgramming\RegistryConverter\RegistryConverter\Registry.xml";
+            
+            XDocument xmlDoc = XDocument.Load(xmlFilePath);
+            
+            var xmlText = xmlDoc.ToString();
+            
+            TextBlockWithXmlText.Text = xmlText;
         }
     }
 }
